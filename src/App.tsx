@@ -4,7 +4,9 @@ import { Editable, Slate, withReact } from "slate-react";
 
 export function App() {
   const [editor] = useState(() => withReact(createEditor()));
-  const initialValue: Descendant[] = [];
+  const initialValue: Descendant[] = [
+    { type: "paragraph", children: [{ text: "Insira seu texto aqui..." }] },
+  ];
 
   return (
     <div className="container">
