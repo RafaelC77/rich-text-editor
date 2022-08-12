@@ -2,10 +2,12 @@ import { useState } from "react";
 import { createEditor, Descendant } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 
+import "./index.css";
+
 export function App() {
   const [editor] = useState(() => withReact(createEditor()));
   const initialValue: Descendant[] = [
-    { type: "paragraph", children: [{ text: "Insira seu texto aqui..." }] },
+    { type: "paragraph", children: [{ text: "Digite seu texto aqui..." }] },
   ];
 
   return (
