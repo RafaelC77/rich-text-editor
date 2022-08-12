@@ -14,9 +14,11 @@ export function App() {
     <div className="container">
       <h1>Rich-Text Editor</h1>
 
-      <Slate editor={editor} value={initialValue}>
-        <Editable />
-      </Slate>
+      <main>
+        <Slate editor={editor} value={initialValue}>
+          <Editable />
+        </Slate>
+      </main>
     </div>
   );
 }
