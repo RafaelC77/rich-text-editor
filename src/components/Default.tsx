@@ -1,9 +1,5 @@
-import { HTMLAttributes } from "react";
+import { RenderElementProps } from "slate-react";
 
-type DefaultProps = HTMLAttributes<HTMLParagraphElement> & {
-  children: any;
-};
-
-export function Default({ children, ...atributes }: DefaultProps) {
-  return <p {...atributes}>{children}</p>;
+export function Default(props: RenderElementProps) {
+  return <p {...props.attributes}>{props.children}</p>;
 }

@@ -1,14 +1,9 @@
-import { HTMLAttributes } from "react";
-import { CustomText } from "../@types/slate";
+import { RenderElementProps } from "slate-react";
 
-type CodeProps = HTMLAttributes<HTMLPreElement> & {
-  children: CustomText;
-};
-
-export function Code({ children, ...atributes }: CodeProps) {
+export function Code(props: RenderElementProps) {
   return (
-    <pre {...atributes}>
-      <code>{children}</code>
+    <pre {...props.attributes}>
+      <code>{props.children}</code>
     </pre>
   );
 }
