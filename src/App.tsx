@@ -25,7 +25,7 @@ export function App() {
   const initialValue: Descendant[] = [
     {
       type: "paragraph",
-      children: [{ text: "Digite seu texto aqui...", bold: false }],
+      children: [{ text: "Digite seu texto aqui..." }],
     },
   ];
 
@@ -53,9 +53,14 @@ export function App() {
       case "b": {
         event.preventDefault();
 
+        const [match] = Editor.nodes(editor, {
+          match: (n) => Text.isText(n) && n.bold === true,
+          universal: true,
+        });
+
         Transforms.setNodes(
           editor,
-          { bold: true },
+          { bold: match ? undefined : true },
           { match: (n) => Text.isText(n), split: true }
         );
         break;
