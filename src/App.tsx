@@ -17,6 +17,7 @@ import {
 import { Code } from "./components/Code";
 import { Default } from "./components/Default";
 import { Leaf } from "./components/Leaf";
+import { CustomEditor } from "./helpers/customEditor";
 
 import "./index.css";
 
@@ -37,32 +38,13 @@ export function App() {
     switch (event.key) {
       case "c": {
         event.preventDefault();
-
-        const [match] = Editor.nodes(editor, {
-          match: (n) => Element.isElement(n) && n.type === "code",
-        });
-
-        Transforms.setNodes(
-          editor,
-          { type: match ? "paragraph" : "code" },
-          { match: (n) => Editor.isBlock(editor, n) }
-        );
+        CustomEditor.toggleCodeBlock(editor);
         break;
       }
 
       case "b": {
         event.preventDefault();
-
-        const [match] = Editor.nodes(editor, {
-          match: (n) => Text.isText(n) && n.bold === true,
-          universal: true,
-        });
-
-        Transforms.setNodes(
-          editor,
-          { bold: match ? undefined : true },
-          { match: (n) => Text.isText(n), split: true }
-        );
+        CustomEditor.toggleBoldMark(editor);
         break;
       }
     }
