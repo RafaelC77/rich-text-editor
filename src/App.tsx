@@ -10,6 +10,7 @@ import {
 import { Code } from "./components/Code";
 import { Default } from "./components/Default";
 import { Leaf } from "./components/Leaf";
+import { Title } from "./components/Title";
 import { CustomEditor } from "./helpers/customEditor";
 
 import "./index.css";
@@ -43,6 +44,12 @@ export function App() {
         break;
       }
 
+      case "y": {
+        event.preventDefault();
+        CustomEditor.toggleTitleBlock(editor);
+        break;
+      }
+
       case "b": {
         event.preventDefault();
         CustomEditor.toggleBoldMark(editor);
@@ -72,6 +79,8 @@ export function App() {
     switch (props.element.type) {
       case "code":
         return <Code {...props} />;
+      case "title":
+        return <Title {...props} />;
       default:
         return <Default {...props} />;
     }

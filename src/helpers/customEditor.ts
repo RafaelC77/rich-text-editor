@@ -27,6 +27,14 @@ export const CustomEditor = {
     return !!match;
   },
 
+  isTitleBlockActive(editor: Editor) {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => Element.isElement(n) && n.type === "title",
+    });
+
+    return !!match;
+  },
+
   toggleBoldMark(editor: Editor) {
     const isActive = CustomEditor.isBoldMarkActive(editor);
     Transforms.setNodes(
@@ -50,6 +58,15 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? "paragraph" : "code" },
+      { match: (n) => Editor.isBlock(editor, n) }
+    );
+  },
+
+  toggleTitleBlock(editor: Editor) {
+    const isActive = CustomEditor.isTitleBlockActive(editor);
+    Transforms.setNodes(
+      editor,
+      { type: isActive ? "paragraph" : "title" },
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },
