@@ -53,6 +53,10 @@ main blockquote {
   padding: 1rem;
   border-left: 0.5rem solid lightgreen;
   margin: 1rem 0;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 main blockquote p {
