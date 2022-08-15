@@ -61,6 +61,12 @@ export function App() {
         CustomEditor.toggleItalicMark(editor);
         break;
       }
+
+      case "q": {
+        event.preventDefault();
+        CustomEditor.toggleUnderlineMark(editor);
+        break;
+      }
     }
   }
 

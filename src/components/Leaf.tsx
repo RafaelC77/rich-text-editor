@@ -7,6 +7,7 @@ export function Leaf(props: RenderLeafProps) {
       style={{
         fontWeight: props.leaf.bold ? "bold" : "normal",
         fontStyle: props.leaf.italic ? "italic" : "normal",
+        textDecorationLine: props.leaf.underline ? "underline" : "none",
       }}
     >
       {props.children}

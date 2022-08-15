@@ -9,7 +9,12 @@ export type TitleElement = { type: "title"; children: CustomText };
 
 export type CustomElement = ParagraphElement | CodeElement | TitleElement;
 
-export type CustomText = { text: string; bold?: true; italic?: true };
+export type CustomText = {
+  text: string;
+  bold?: true;
+  italic?: true;
+  underline?: true;
+};
 
 declare module "slate" {
   interface CustomTypes {

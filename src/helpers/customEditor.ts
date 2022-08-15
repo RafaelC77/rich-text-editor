@@ -19,6 +19,15 @@ export const CustomEditor = {
     return !!match;
   },
 
+  isUnderLineMarkActive(editor: Editor) {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => Text.isText(n) && n.underline === true,
+      universal: true,
+    });
+
+    return !!match;
+  },
+
   isCodeBlockActive(editor: Editor) {
     const [match] = Editor.nodes(editor, {
       match: (n) => Element.isElement(n) && n.type === "code",
@@ -49,6 +58,15 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { italic: isActive ? undefined : true },
+      { match: (n) => Text.isText(n), split: true }
+    );
+  },
+
+  toggleUnderlineMark(editor: Editor) {
+    const isActive = CustomEditor.isUnderLineMarkActive(editor);
+    Transforms.setNodes(
+      editor,
+      { underline: isActive ? undefined : true },
       { match: (n) => Text.isText(n), split: true }
     );
   },
