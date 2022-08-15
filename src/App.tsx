@@ -1,12 +1,11 @@
-import { KeyboardEvent, useCallback, useState } from "react";
 import {
-  createEditor,
-  Descendant,
-  Editor,
-  Element,
-  Text,
-  Transforms,
-} from "slate";
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
+import { createEditor, Descendant } from "slate";
 import {
   Editable,
   RenderElementProps,
@@ -23,12 +22,20 @@ import "./index.css";
 
 export function App() {
   const [editor] = useState(() => withReact(createEditor()));
-  const initialValue: Descendant[] = [
-    {
-      type: "paragraph",
-      children: [{ text: "Digite seu texto aqui..." }],
-    },
-  ];
+  const initialValue: Descendant[] = useMemo(() => {
+    const content = localStorage.getItem("@TextEditor:content");
+
+    if (content) {
+      return JSON.parse(content);
+    } else {
+      return [
+        {
+          type: "paragraph",
+          children: [{ text: "Digite seu texto aqui..." }],
+        },
+      ];
+    }
+  }, []);
 
   function handleKeyDown(event: KeyboardEvent) {
     if (!event.ctrlKey) {
@@ -50,6 +57,17 @@ export function App() {
     }
   }
 
+  function saveContent(value: Descendant[]) {
+    const isAstChange = editor.operations.some(
+      (op) => "set_selection" !== op.type
+    );
+
+    if (isAstChange) {
+      const content = JSON.stringify(value);
+      localStorage.setItem("@TextEditor:content", content);
+    }
+  }
+
   const renderElement = useCallback((props: RenderElementProps) => {
     switch (props.element.type) {
       case "code":
@@ -68,7 +86,11 @@ export function App() {
       <h1>Rich-Text Editor</h1>
 
       <main>
-        <Slate editor={editor} value={initialValue}>
+        <Slate
+          editor={editor}
+          value={initialValue}
+          onChange={(value) => saveContent(value)}
+        >
           <Editable
             onKeyDown={(e) => handleKeyDown(e)}
             renderElement={renderElement}
