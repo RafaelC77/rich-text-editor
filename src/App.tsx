@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import { KeyboardEvent, useCallback, useMemo, useState } from "react";
 import { createEditor, Descendant } from "slate";
 import {
   Editable,
@@ -52,6 +46,12 @@ export function App() {
       case "b": {
         event.preventDefault();
         CustomEditor.toggleBoldMark(editor);
+        break;
+      }
+
+      case "i": {
+        event.preventDefault();
+        CustomEditor.toggleItalicMark(editor);
         break;
       }
     }
