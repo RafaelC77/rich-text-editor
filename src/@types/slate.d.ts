@@ -7,7 +7,13 @@ export type CodeElement = { type: "code"; children: CustomText };
 
 export type TitleElement = { type: "title"; children: CustomText };
 
-export type CustomElement = ParagraphElement | CodeElement | TitleElement;
+export type QuoteElement = { type: "quote"; children: CustomText };
+
+export type CustomElement =
+  | ParagraphElement
+  | CodeElement
+  | TitleElement
+  | QuoteElement;
 
 export type CustomText = {
   text: string;

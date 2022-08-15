@@ -44,6 +44,14 @@ export const CustomEditor = {
     return !!match;
   },
 
+  isQuoteBlockActive(editor: Editor) {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => Element.isElement(n) && n.type === "quote",
+    });
+
+    return !!match;
+  },
+
   toggleBoldMark(editor: Editor) {
     const isActive = CustomEditor.isBoldMarkActive(editor);
     Transforms.setNodes(
@@ -85,6 +93,15 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? "paragraph" : "title" },
+      { match: (n) => Editor.isBlock(editor, n) }
+    );
+  },
+
+  toggleQuoteBlock(editor: Editor) {
+    const isActive = CustomEditor.isQuoteBlockActive(editor);
+    Transforms.setNodes(
+      editor,
+      { type: isActive ? "paragraph" : "quote" },
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },

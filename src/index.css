@@ -39,3 +39,21 @@ main {
   border-radius: 6px;
   box-shadow: rgba(118, 143, 255, 0.1) 0 1rem 1.5rem 0;
 }
+
+main h1 {
+  margin-bottom: 1rem;
+}
+
+main p {
+  margin-bottom: 0.25rem;
+}
+
+main blockquote {
+  background: #eee;
+  padding: 1rem;
+  border-left: 0.5rem solid lightgreen;
+  margin: 1rem 0;
+}
+
+main blockquote p {
+}

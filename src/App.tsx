@@ -10,6 +10,7 @@ import {
 import { Code } from "./components/Code";
 import { Default } from "./components/Default";
 import { Leaf } from "./components/Leaf";
+import { Quote } from "./components/Quote";
 import { Title } from "./components/Title";
 import { CustomEditor } from "./helpers/customEditor";
 
@@ -50,6 +51,12 @@ export function App() {
         break;
       }
 
+      case "q": {
+        event.preventDefault();
+        CustomEditor.toggleQuoteBlock(editor);
+        break;
+      }
+
       case "b": {
         event.preventDefault();
         CustomEditor.toggleBoldMark(editor);
@@ -62,7 +69,7 @@ export function App() {
         break;
       }
 
-      case "q": {
+      case "m": {
         event.preventDefault();
         CustomEditor.toggleUnderlineMark(editor);
         break;
@@ -87,6 +94,8 @@ export function App() {
         return <Code {...props} />;
       case "title":
         return <Title {...props} />;
+      case "quote":
+        return <Quote {...props} />;
       default:
         return <Default {...props} />;
     }
