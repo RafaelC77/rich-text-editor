@@ -45,7 +45,8 @@ main h1 {
 }
 
 main p,
-pre {
+pre,
+ul {
   margin-bottom: 0.75rem;
 }
 
@@ -63,4 +64,8 @@ main blockquote > p {
   margin: 0;
   display: flex;
   align-items: center;
+}
+
+li {
+  list-style-position: inside;
 }

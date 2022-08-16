@@ -25,13 +25,27 @@ export type QuoteElement = {
   children: CustomText;
 };
 
+export type ListElement = {
+  type: "list";
+  textAlign?: TextAlign;
+  children: CustomText[];
+};
+
+export type ListItemElement = {
+  type: "list-item";
+  textAlign?: TextAlign;
+  children: CustomText;
+};
+
 export type TextAlign = "center" | "left" | "right" | "justify";
 
 export type CustomElement =
   | ParagraphElement
   | CodeElement
   | TitleElement
-  | QuoteElement;
+  | QuoteElement
+  | ListElement
+  | ListItemElement;
 
 export type CustomText = {
   text: string;

@@ -1,5 +1,5 @@
 import { KeyboardEvent, useCallback, useMemo, useState } from "react";
-import { createEditor, Descendant } from "slate";
+import { createEditor, Descendant, Editor, Element, Path } from "slate";
 import {
   Editable,
   RenderElementProps,
@@ -10,6 +10,8 @@ import {
 import { Code } from "./components/Code";
 import { Default } from "./components/Default";
 import { Leaf } from "./components/Leaf";
+import { List } from "./components/List";
+import { ListItem } from "./components/ListItem";
 import { Quote } from "./components/Quote";
 import { Title } from "./components/Title";
 import { CustomEditor } from "./helpers/customEditor";
@@ -18,6 +20,7 @@ import "./index.css";
 
 export function App() {
   const [editor] = useState(() => withReact(createEditor()));
+
   const initialValue: Descendant[] = useMemo(() => {
     const content = localStorage.getItem("@TextEditor:content");
 
@@ -56,6 +59,12 @@ export function App() {
       case "q": {
         event.preventDefault();
         CustomEditor.toggleQuoteBlock(editor);
+        break;
+      }
+
+      case "z": {
+        event.preventDefault();
+        CustomEditor.toggleListBlock(editor);
         break;
       }
 
@@ -126,6 +135,10 @@ export function App() {
         return <Title {...props} />;
       case "quote":
         return <Quote {...props} />;
+      case "list":
+        return <List {...props} />;
+      case "list-item":
+        return <ListItem {...props} />;
       default:
         return <Default {...props} />;
     }

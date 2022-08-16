@@ -1,5 +1,5 @@
 import { Editor, Text, Element, Transforms } from "slate";
-import { TextAlign } from "../@types/slate";
+import { CustomElement, ListItemElement, TextAlign } from "../@types/slate";
 
 export const CustomEditor = {
   isBoldMarkActive(editor: Editor) {
@@ -49,6 +49,22 @@ export const CustomEditor = {
     const [match] = Editor.nodes(editor, {
       match: (n) => Element.isElement(n) && n.type === "quote",
     });
+
+    return !!match;
+  },
+
+  isListBlockActive(editor: Editor) {
+    const { selection } = editor;
+
+    if (!selection) return false;
+
+    const [match] = Array.from(
+      Editor.nodes(editor, {
+        at: Editor.unhangRange(editor, selection),
+        match: (n) =>
+          !Editor.isEditor(n) && Element.isElement(n) && n.type === "list",
+      })
+    );
 
     return !!match;
   },
@@ -105,6 +121,26 @@ export const CustomEditor = {
       { type: isActive ? "paragraph" : "quote" },
       { match: (n) => Editor.isBlock(editor, n) }
     );
+  },
+
+  toggleListBlock(editor: Editor) {
+    const isActive = CustomEditor.isListBlockActive(editor);
+
+    Transforms.unwrapNodes(editor, {
+      match: (n) =>
+        !Editor.isEditor(n) && Element.isElement(n) && n.type === "list",
+      split: true,
+    });
+
+    Transforms.setNodes(
+      editor,
+      { type: isActive ? "paragraph" : "list-item" },
+      { match: (n) => Editor.isBlock(editor, n) }
+    );
+
+    if (!isActive) {
+      Transforms.wrapNodes(editor, { type: "list", children: [] });
+    }
   },
 
   setTextAlign(editor: Editor, value: TextAlign) {
