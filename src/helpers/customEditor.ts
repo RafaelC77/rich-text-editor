@@ -1,4 +1,5 @@
 import { Editor, Text, Element, Transforms } from "slate";
+import { TextAlign } from "../@types/slate";
 
 export const CustomEditor = {
   isBoldMarkActive(editor: Editor) {
@@ -102,6 +103,14 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? "paragraph" : "quote" },
+      { match: (n) => Editor.isBlock(editor, n) }
+    );
+  },
+
+  setTextAlign(editor: Editor, value: TextAlign) {
+    Transforms.setNodes(
+      editor,
+      { textAlign: value },
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },

@@ -44,8 +44,9 @@ main h1 {
   margin-bottom: 1rem;
 }
 
-main p {
-  margin-bottom: 0.25rem;
+main p,
+pre {
+  margin-bottom: 0.75rem;
 }
 
 main blockquote {
@@ -55,9 +56,11 @@ main blockquote {
   margin: 1rem 0;
 
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 
-main blockquote p {
+main blockquote > p {
+  margin: 0;
+  display: flex;
+  align-items: center;
 }

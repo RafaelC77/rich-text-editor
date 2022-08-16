@@ -34,18 +34,20 @@ export function App() {
   }, []);
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (!event.ctrlKey) {
+    if (!event.altKey) {
       return;
     }
 
     switch (event.key) {
+      // Formatação em bloco
+
       case "c": {
         event.preventDefault();
         CustomEditor.toggleCodeBlock(editor);
         break;
       }
 
-      case "y": {
+      case "t": {
         event.preventDefault();
         CustomEditor.toggleTitleBlock(editor);
         break;
@@ -56,6 +58,8 @@ export function App() {
         CustomEditor.toggleQuoteBlock(editor);
         break;
       }
+
+      // Formatação em linha
 
       case "b": {
         event.preventDefault();
@@ -69,9 +73,35 @@ export function App() {
         break;
       }
 
-      case "m": {
+      case "u": {
         event.preventDefault();
         CustomEditor.toggleUnderlineMark(editor);
+        break;
+      }
+
+      // Alinhamento de texto
+
+      case "e": {
+        event.preventDefault();
+        CustomEditor.setTextAlign(editor, "center");
+        break;
+      }
+
+      case "l": {
+        event.preventDefault();
+        CustomEditor.setTextAlign(editor, "left");
+        break;
+      }
+
+      case "r": {
+        event.preventDefault();
+        CustomEditor.setTextAlign(editor, "right");
+        break;
+      }
+
+      case "j": {
+        event.preventDefault();
+        CustomEditor.setTextAlign(editor, "justify");
         break;
       }
     }

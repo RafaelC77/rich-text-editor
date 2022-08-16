@@ -1,13 +1,31 @@
 import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
 
-export type ParagraphElement = { type: "paragraph"; children: CustomText[] };
+export type ParagraphElement = {
+  type: "paragraph";
+  textAlign?: TextAlign;
+  children: CustomText[];
+};
 
-export type CodeElement = { type: "code"; children: CustomText };
+export type CodeElement = {
+  type: "code";
+  textAlign?: TextAlign;
+  children: CustomText;
+};
 
-export type TitleElement = { type: "title"; children: CustomText };
+export type TitleElement = {
+  type: "title";
+  textAlign?: TextAlign;
+  children: CustomText;
+};
 
-export type QuoteElement = { type: "quote"; children: CustomText };
+export type QuoteElement = {
+  type: "quote";
+  textAlign?: TextAlign;
+  children: CustomText;
+};
+
+export type TextAlign = "center" | "left" | "right" | "justify";
 
 export type CustomElement =
   | ParagraphElement
