@@ -69,3 +69,19 @@ main blockquote > p {
 li {
   list-style-position: inside;
 }
+
+.toolbar {
+  border-bottom: 1px solid #eee;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+button + button {
+  margin-left: 0.75rem;
+}

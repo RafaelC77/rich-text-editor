@@ -1,5 +1,18 @@
+import {
+  CodeSimple,
+  ListDashes,
+  Quotes,
+  TextAlignCenter,
+  TextAlignJustify,
+  TextAlignLeft,
+  TextAlignRight,
+  TextBolder,
+  TextH,
+  TextItalic,
+  TextUnderline,
+} from "phosphor-react";
 import { KeyboardEvent, useCallback, useMemo, useState } from "react";
-import { createEditor, Descendant, Editor, Element, Path } from "slate";
+import { createEditor, Descendant } from "slate";
 import {
   Editable,
   RenderElementProps,
@@ -153,6 +166,74 @@ export function App() {
       <h1>Rich-Text Editor</h1>
 
       <main>
+        <div className="toolbar">
+          <button
+            title="Título (alt+t)"
+            onClick={() => CustomEditor.toggleTitleBlock(editor)}
+          >
+            <TextH size={22} />
+          </button>
+          <button
+            title="Negrito (alt+b)"
+            onClick={() => CustomEditor.toggleBoldMark(editor)}
+          >
+            <TextBolder size={22} />
+          </button>
+          <button
+            title="Itálico (alt+i)"
+            onClick={() => CustomEditor.toggleItalicMark(editor)}
+          >
+            <TextItalic size={22} />
+          </button>
+          <button
+            title="Sublinhado (alt+u)"
+            onClick={() => CustomEditor.toggleUnderlineMark(editor)}
+          >
+            <TextUnderline size={22} />
+          </button>
+          <button
+            title="Citação (alt+q)"
+            onClick={() => CustomEditor.toggleQuoteBlock(editor)}
+          >
+            <Quotes size={22} weight={"fill"} />
+          </button>
+          <button
+            title="Código (alt+c)"
+            onClick={() => CustomEditor.toggleCodeBlock(editor)}
+          >
+            <CodeSimple size={22} />
+          </button>
+          <button
+            title="Lista (alt+z)"
+            onClick={() => CustomEditor.toggleListBlock(editor)}
+          >
+            <ListDashes size={22} />
+          </button>
+          <button
+            title="Justificar (alt+j)"
+            onClick={() => CustomEditor.setTextAlign(editor, "justify")}
+          >
+            <TextAlignJustify size={22} />
+          </button>
+          <button
+            title="Centralizar (alt+e)"
+            onClick={() => CustomEditor.setTextAlign(editor, "center")}
+          >
+            <TextAlignCenter size={22} />
+          </button>
+          <button
+            title="Alinhar à esquerda (alt+l)"
+            onClick={() => CustomEditor.setTextAlign(editor, "left")}
+          >
+            <TextAlignLeft size={22} />
+          </button>
+          <button
+            title="Alinhar à direita (alt+r)"
+            onClick={() => CustomEditor.setTextAlign(editor, "right")}
+          >
+            <TextAlignRight size={22} />
+          </button>
+        </div>
         <Slate
           editor={editor}
           value={initialValue}
