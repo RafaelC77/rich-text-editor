@@ -22,6 +22,7 @@ import {
 } from "slate-react";
 import { Code } from "./components/Code";
 import { Default } from "./components/Default";
+import { Header } from "./components/Header";
 import { Leaf } from "./components/Leaf";
 import { List } from "./components/List";
 import { ListItem } from "./components/ListItem";
@@ -32,6 +33,7 @@ import { CustomEditor } from "./helpers/customEditor";
 import "./index.css";
 
 export function App() {
+  const [theme, setTheme] = useState("light");
   const [editor] = useState(() => withReact(createEditor()));
 
   const initialValue: Descendant[] = useMemo(() => {
@@ -161,91 +163,97 @@ export function App() {
     return <Leaf {...props} />;
   }, []);
 
-  return (
-    <div className="container">
-      <h1>Rich-Text Editor</h1>
+  function toggleTheme() {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  }
 
-      <main>
-        <div className="toolbar">
-          <button
-            title="Título (alt+t)"
-            onClick={() => CustomEditor.toggleTitleBlock(editor)}
+  return (
+    <>
+      <Header theme={theme} onThemeChange={toggleTheme} />
+
+      <div className="container">
+        <main>
+          <div className="toolbar">
+            <button
+              title="Título (alt+t)"
+              onClick={() => CustomEditor.toggleTitleBlock(editor)}
+            >
+              <TextH size={22} />
+            </button>
+            <button
+              title="Negrito (alt+b)"
+              onClick={() => CustomEditor.toggleBoldMark(editor)}
+            >
+              <TextBolder size={22} />
+            </button>
+            <button
+              title="Itálico (alt+i)"
+              onClick={() => CustomEditor.toggleItalicMark(editor)}
+            >
+              <TextItalic size={22} />
+            </button>
+            <button
+              title="Sublinhado (alt+u)"
+              onClick={() => CustomEditor.toggleUnderlineMark(editor)}
+            >
+              <TextUnderline size={22} />
+            </button>
+            <button
+              title="Citação (alt+q)"
+              onClick={() => CustomEditor.toggleQuoteBlock(editor)}
+            >
+              <Quotes size={22} weight={"fill"} />
+            </button>
+            <button
+              title="Código (alt+c)"
+              onClick={() => CustomEditor.toggleCodeBlock(editor)}
+            >
+              <CodeSimple size={22} />
+            </button>
+            <button
+              title="Lista (alt+z)"
+              onClick={() => CustomEditor.toggleListBlock(editor)}
+            >
+              <ListDashes size={22} />
+            </button>
+            <button
+              title="Justificar (alt+j)"
+              onClick={() => CustomEditor.setTextAlign(editor, "justify")}
+            >
+              <TextAlignJustify size={22} />
+            </button>
+            <button
+              title="Centralizar (alt+e)"
+              onClick={() => CustomEditor.setTextAlign(editor, "center")}
+            >
+              <TextAlignCenter size={22} />
+            </button>
+            <button
+              title="Alinhar à esquerda (alt+l)"
+              onClick={() => CustomEditor.setTextAlign(editor, "left")}
+            >
+              <TextAlignLeft size={22} />
+            </button>
+            <button
+              title="Alinhar à direita (alt+r)"
+              onClick={() => CustomEditor.setTextAlign(editor, "right")}
+            >
+              <TextAlignRight size={22} />
+            </button>
+          </div>
+          <Slate
+            editor={editor}
+            value={initialValue}
+            onChange={(value) => saveContent(value)}
           >
-            <TextH size={22} />
-          </button>
-          <button
-            title="Negrito (alt+b)"
-            onClick={() => CustomEditor.toggleBoldMark(editor)}
-          >
-            <TextBolder size={22} />
-          </button>
-          <button
-            title="Itálico (alt+i)"
-            onClick={() => CustomEditor.toggleItalicMark(editor)}
-          >
-            <TextItalic size={22} />
-          </button>
-          <button
-            title="Sublinhado (alt+u)"
-            onClick={() => CustomEditor.toggleUnderlineMark(editor)}
-          >
-            <TextUnderline size={22} />
-          </button>
-          <button
-            title="Citação (alt+q)"
-            onClick={() => CustomEditor.toggleQuoteBlock(editor)}
-          >
-            <Quotes size={22} weight={"fill"} />
-          </button>
-          <button
-            title="Código (alt+c)"
-            onClick={() => CustomEditor.toggleCodeBlock(editor)}
-          >
-            <CodeSimple size={22} />
-          </button>
-          <button
-            title="Lista (alt+z)"
-            onClick={() => CustomEditor.toggleListBlock(editor)}
-          >
-            <ListDashes size={22} />
-          </button>
-          <button
-            title="Justificar (alt+j)"
-            onClick={() => CustomEditor.setTextAlign(editor, "justify")}
-          >
-            <TextAlignJustify size={22} />
-          </button>
-          <button
-            title="Centralizar (alt+e)"
-            onClick={() => CustomEditor.setTextAlign(editor, "center")}
-          >
-            <TextAlignCenter size={22} />
-          </button>
-          <button
-            title="Alinhar à esquerda (alt+l)"
-            onClick={() => CustomEditor.setTextAlign(editor, "left")}
-          >
-            <TextAlignLeft size={22} />
-          </button>
-          <button
-            title="Alinhar à direita (alt+r)"
-            onClick={() => CustomEditor.setTextAlign(editor, "right")}
-          >
-            <TextAlignRight size={22} />
-          </button>
-        </div>
-        <Slate
-          editor={editor}
-          value={initialValue}
-          onChange={(value) => saveContent(value)}
-        >
-          <Editable
-            onKeyDown={(e) => handleKeyDown(e)}
-            renderElement={renderElement}
-            renderLeaf={renderLeaf}
-          />
-        </Slate>
-      </main>
-    </div>
+            <Editable
+              onKeyDown={(e) => handleKeyDown(e)}
+              renderElement={renderElement}
+              renderLeaf={renderLeaf}
+            />
+          </Slate>
+        </main>
+      </div>
+    </>
   );
 }
