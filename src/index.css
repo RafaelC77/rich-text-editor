@@ -18,6 +18,13 @@ code {
     monospace;
 }
 
+.background {
+  width: 100vw;
+  height: calc(100vh - 5rem);
+  position: absolute;
+  top: 5rem;
+}
+
 .container {
   max-width: 74rem;
   margin: 0 auto;
@@ -93,6 +100,28 @@ main button {
 main button span {
   text-align: left;
   font-size: 1rem;
+}
+
+.dark-theme {
+  background: #171923;
+  color: white;
+}
+
+.dark-theme-main {
+  background: #2d3748;
+  box-shadow: none;
+}
+
+.dark-theme button {
+  color: white;
+}
+
+.dark-theme blockquote {
+  color: black;
+}
+
+.dark-theme main blockquote {
+  background: #718096;
 }
 
 @media (max-width: 992px) {
