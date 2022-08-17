@@ -270,6 +270,7 @@ export function App() {
               </Slate>
             </div>
           </main>
+          <footer>RT Editor 2022</footer>
         </div>
       </div>
     </>

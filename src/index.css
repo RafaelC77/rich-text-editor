@@ -111,6 +111,12 @@ main button span {
   width: 100%;
 }
 
+footer {
+  text-align: center;
+  margin-top: 1rem;
+  color: #a0aec0;
+}
+
 .dark-theme {
   background: #171923;
   color: white;
