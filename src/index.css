@@ -73,6 +73,11 @@ li {
   list-style-position: inside;
 }
 
+main code {
+  background: #eee;
+  padding: 0.5rem;
+}
+
 .toolbar {
   border-right: 1px solid #eee;
   padding: 0 2rem 0 0;
@@ -102,6 +107,10 @@ main button span {
   font-size: 1rem;
 }
 
+.editor-container {
+  width: 100%;
+}
+
 .dark-theme {
   background: #171923;
   color: white;
@@ -120,7 +129,8 @@ main button span {
   color: black;
 }
 
-.dark-theme main blockquote {
+.dark-theme main blockquote,
+.dark-theme main code {
   background: #718096;
 }
 

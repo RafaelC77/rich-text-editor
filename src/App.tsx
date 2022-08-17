@@ -175,8 +175,8 @@ export function App() {
 
       <div className={`background ${isDarkTheme && "dark-theme"}`}>
         <div className="container">
-          <main className={`${isDarkTheme && "dark-theme-main"}`}>
-            <div className={`toolbar ${isDarkTheme && "dark-theme-color"}`}>
+          <main className={`${isDarkTheme ? "dark-theme-main" : ""}`}>
+            <div className="toolbar">
               <button
                 title="Título (alt+t)"
                 onClick={() => CustomEditor.toggleTitleBlock(editor)}
@@ -255,17 +255,20 @@ export function App() {
                 <span>Alinhar à direita</span>
               </button>
             </div>
-            <Slate
-              editor={editor}
-              value={initialValue}
-              onChange={(value) => saveContent(value)}
-            >
-              <Editable
-                onKeyDown={(e) => handleKeyDown(e)}
-                renderElement={renderElement}
-                renderLeaf={renderLeaf}
-              />
-            </Slate>
+
+            <div className="editor-container">
+              <Slate
+                editor={editor}
+                value={initialValue}
+                onChange={(value) => saveContent(value)}
+              >
+                <Editable
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  renderElement={renderElement}
+                  renderLeaf={renderLeaf}
+                />
+              </Slate>
+            </div>
           </main>
         </div>
       </div>
