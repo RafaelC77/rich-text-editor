@@ -1,17 +1,4 @@
-import {
-  CodeSimple,
-  ListDashes,
-  Quotes,
-  TextAlignCenter,
-  TextAlignJustify,
-  TextAlignLeft,
-  TextAlignRight,
-  TextBolder,
-  TextH,
-  TextItalic,
-  TextUnderline,
-} from "phosphor-react";
-import { KeyboardEvent, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { createEditor, Descendant } from "slate";
 import {
   Editable,
@@ -29,7 +16,7 @@ import { ListItem } from "./components/ListItem";
 import { Quote } from "./components/Quote";
 import { Title } from "./components/Title";
 import { Toolbar } from "./components/Toolbar";
-import { CustomEditor } from "./helpers/customEditor";
+import { handleKeyDown } from "./helpers/keyboardShortcuts";
 
 import "./index.css";
 
@@ -53,86 +40,6 @@ export function App() {
       ];
     }
   }, []);
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if (!event.altKey) {
-      return;
-    }
-
-    switch (event.key) {
-      // Formatação em bloco
-
-      case "c": {
-        event.preventDefault();
-        CustomEditor.toggleCodeBlock(editor);
-        break;
-      }
-
-      case "t": {
-        event.preventDefault();
-        CustomEditor.toggleTitleBlock(editor);
-        break;
-      }
-
-      case "q": {
-        event.preventDefault();
-        CustomEditor.toggleQuoteBlock(editor);
-        break;
-      }
-
-      case "z": {
-        event.preventDefault();
-        CustomEditor.toggleListBlock(editor);
-        break;
-      }
-
-      // Formatação em linha
-
-      case "b": {
-        event.preventDefault();
-        CustomEditor.toggleBoldMark(editor);
-        break;
-      }
-
-      case "i": {
-        event.preventDefault();
-        CustomEditor.toggleItalicMark(editor);
-        break;
-      }
-
-      case "u": {
-        event.preventDefault();
-        CustomEditor.toggleUnderlineMark(editor);
-        break;
-      }
-
-      // Alinhamento de texto
-
-      case "e": {
-        event.preventDefault();
-        CustomEditor.setTextAlign(editor, "center");
-        break;
-      }
-
-      case "l": {
-        event.preventDefault();
-        CustomEditor.setTextAlign(editor, "left");
-        break;
-      }
-
-      case "r": {
-        event.preventDefault();
-        CustomEditor.setTextAlign(editor, "right");
-        break;
-      }
-
-      case "j": {
-        event.preventDefault();
-        CustomEditor.setTextAlign(editor, "justify");
-        break;
-      }
-    }
-  }
 
   function saveContent(value: Descendant[]) {
     const isAstChange = editor.operations.some(
@@ -186,7 +93,7 @@ export function App() {
                 onChange={(value) => saveContent(value)}
               >
                 <Editable
-                  onKeyDown={(e) => handleKeyDown(e)}
+                  onKeyDown={(e) => handleKeyDown(e, editor)}
                   renderElement={renderElement}
                   renderLeaf={renderLeaf}
                 />
