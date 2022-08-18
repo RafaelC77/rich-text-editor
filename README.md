@@ -1,7 +1,5 @@
 # Rich-text Editor
 
-***
-
 Projeto de um editor de texto em formato rich-text (RTF),
 onde é possível adicionar algumas formatações simples.
 
