@@ -19,7 +19,7 @@ export function Header({ theme, onThemeChange }: HeaderProps) {
               {theme === "light" ? (
                 <Moon weight="fill" size={16} />
               ) : (
-                <Sun size={16} />
+                <Sun size={16} weight="fill" />
               )}
             </div>
           </div>

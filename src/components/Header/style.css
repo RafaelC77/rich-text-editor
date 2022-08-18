@@ -38,6 +38,11 @@ header button {
   transition: 0.2s;
 }
 
+.dark {
+  background: #171923;
+  color: white;
+}
+
 .dark .switch {
   left: 20px;
 }
