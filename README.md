@@ -14,3 +14,7 @@ onde é possível adicionar algumas formatações simples.
   - React
   - Typescript
   - SlateJS
+
+## Deploy da aplicação
+
+  - [RT Editor](https://rt-editor.netlify.app/)
