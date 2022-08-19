@@ -84,14 +84,13 @@ export function App() {
       <div className={`background ${isDarkTheme && "dark-theme"}`}>
         <div className="container">
           <main className={`${isDarkTheme ? "dark-theme-main" : ""}`}>
-            <Toolbar editor={editor} />
-
             <div className="editor-container">
               <Slate
                 editor={editor}
                 value={initialValue}
                 onChange={(value) => saveContent(value)}
               >
+                <Toolbar />
                 <Editable
                   onKeyDown={(e) => handleKeyDown(e, editor)}
                   renderElement={renderElement}
@@ -100,8 +99,9 @@ export function App() {
               </Slate>
             </div>
           </main>
-          <footer>RT Editor 2022</footer>
         </div>
+
+        <footer>RT Editor 2022</footer>
       </div>
     </>
   );

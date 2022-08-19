@@ -19,6 +19,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  border-radius: 4px;
+  padding: 0 0.25rem;
+  transition: 0.1s;
+}
+
+.toolbar button:hover:not(.active) {
+  background: #cbd5e0;
+}
+
+.active {
+  background: #171923;
+  color: white;
 }
 
 @media (max-width: 992px) {

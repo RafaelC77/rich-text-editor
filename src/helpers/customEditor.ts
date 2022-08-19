@@ -29,6 +29,15 @@ export const CustomEditor = {
     return !!match;
   },
 
+  isTextAlignActive(editor: Editor, value: TextAlign) {
+    const [match] = Editor.nodes(editor, {
+      match: (n) => Element.isElement(n) && n.textAlign === value,
+      universal: true,
+    });
+
+    return !!match;
+  },
+
   isCodeBlockActive(editor: Editor) {
     const [match] = Editor.nodes(editor, {
       match: (n) => Element.isElement(n) && n.type === "code",
@@ -144,9 +153,10 @@ export const CustomEditor = {
   },
 
   setTextAlign(editor: Editor, value: TextAlign) {
+    const isActive = CustomEditor.isTextAlignActive(editor, value);
     Transforms.setNodes(
       editor,
-      { textAlign: value },
+      { textAlign: isActive ? undefined : value },
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },
