@@ -95,6 +95,7 @@ export function App() {
                   onKeyDown={(e) => handleKeyDown(e, editor)}
                   renderElement={renderElement}
                   renderLeaf={renderLeaf}
+                  className="editable"
                 />
               </Slate>
             </div>
